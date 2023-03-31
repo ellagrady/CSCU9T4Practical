@@ -19,6 +19,7 @@ public class TrainingRecord {
     } // addClass
 
     // look up the entry of a given day and month
+    // returns last occurrence of date in list
     public String lookupEntry(int d, int m, int y) {
         ListIterator<Entry> iter = tr.listIterator();
         String result = "No entries found";
@@ -29,6 +30,21 @@ public class TrainingRecord {
         }
         return result;
     } // lookupEntry
+
+    // look up all entries of a given day and month
+    // returns all the entries in a single string
+    public String findAllbyDate(int d, int m, int y) {
+        ListIterator<Entry> iter = tr.listIterator();
+        //List<String> results = new ArrayList<String>();
+        String results = "";
+        while (iter.hasNext()) {
+            Entry current = iter.next();
+            if (current.getDay() == d && current.getMonth() == m && current.getYear() == y) {
+                results += (current.getEntry());
+            }
+        }
+        return results;
+    }
 
     // Count the number of entries
     public int getNumberOfEntries() {

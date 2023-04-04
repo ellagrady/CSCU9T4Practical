@@ -105,13 +105,79 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         String message = "Record added\n";
         System.out.println("Adding " + what + " entry to the records");
         String n = name.getText();
-        int m = Integer.parseInt(month.getText());
-        int d = Integer.parseInt(day.getText());
-        int y = Integer.parseInt(year.getText());
-        float km = java.lang.Float.parseFloat(dist.getText());
-        int h = Integer.parseInt(hours.getText());
-        int mm = Integer.parseInt(mins.getText());
-        int s = Integer.parseInt(secs.getText());
+        if (n.equals("")) {
+            message = "Name should not be an empty string";
+            return message;
+        }
+
+        int m = 0;
+        int d = 0;
+        int y = 0;
+        try {
+            m = Integer.parseInt(month.getText());
+        } catch (NumberFormatException excp) {
+            message = "Incorrect type of month input, should be in integer format";
+            return message;
+        }
+        try {
+            d = Integer.parseInt(day.getText());
+        } catch (NumberFormatException excp) {
+            message = "Incorrect type of day input, should be in integer format";
+            return message;
+        }
+        try {
+            y = Integer.parseInt(year.getText());
+        } catch (NumberFormatException excp) {
+            message = "Incorrect type of year input, should be in integer format";
+            return message;
+        }
+        float km = 0;
+        try {
+            km = java.lang.Float.parseFloat(dist.getText());
+        } catch (NumberFormatException excp) {
+            message = "Incorrect type of distance input, should be in numerical format";
+            return message;
+        }
+        int h = 0;
+        int mm = 0;
+        int s = 0;
+        try {
+            h = Integer.parseInt(hours.getText());
+        } catch (NumberFormatException excp) {
+            message = "Incorrect type of hours input, should be in integer format";
+            return message;
+        }
+        try {
+            mm = Integer.parseInt(mins.getText());
+        } catch (NumberFormatException excp) {
+            message = "Incorrect type of mins input, should be in integer format";
+            return message;
+        }
+        try {
+            s = Integer.parseInt(secs.getText());
+        } catch (NumberFormatException excp) {
+            message = "Incorrect type of seconds input, should be in integer format";
+            return message;
+        }
+        String results = myAthletes.findAllbyDate(d, m, y);
+
+        if (results.length() > 1) {
+            String[] arr = results.split("\n");
+
+            for (String value : arr) {
+                String[] individualEntry = value.split(" ");
+                String[] time = individualEntry[5].split(":");
+                String[] date = individualEntry[7].split("/");
+                if (individualEntry[0].equals(n) && (Float.parseFloat(individualEntry[2]) == km)
+                        && (Integer.parseInt(time[0]) == h) && (Integer.parseInt(time[1]) == mm) && (Integer.parseInt(time[2]) == s)
+                        && (Integer.parseInt(date[0]) == d) && (Integer.parseInt(date[1]) == m) && (Integer.parseInt(date[2]) == y)) {
+                    message = "Attempted entry is a duplicate of previous entry: \n" + value;
+                    return message;
+
+                }
+            }
+        }
+
         Entry e = new Entry(n, d, m, y, h, mm, s, km);
         myAthletes.addEntry(e);
         return message;

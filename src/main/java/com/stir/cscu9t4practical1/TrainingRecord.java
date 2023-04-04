@@ -13,10 +13,23 @@ public class TrainingRecord {
         tr = new ArrayList<Entry>();
     } //constructor
 
+
     // add a record to the list
     public void addEntry(Entry e) {
         tr.add(e);
     } // addClass
+
+    public void addEntry(SwimEntry e) {
+        tr.add(e);
+    }
+
+    public void addEntry(CycleEntry e) {
+        tr.add(e);
+    }
+
+    public void addEntry(SprintEntry e) {
+        tr.add(e);
+    }
 
     // look up the entry of a given day and month
     // returns last occurrence of date in list
@@ -41,6 +54,18 @@ public class TrainingRecord {
             Entry current = iter.next();
             if (current.getDay() == d && current.getMonth() == m && current.getYear() == y) {
                 results += (current.getEntry());
+            }
+        }
+        return results;
+    }
+
+    public String searchByName(String name) {
+        ListIterator<Entry> iter = tr.listIterator();
+        String results = "";
+        while (iter.hasNext()) {
+            Entry current = iter.next();
+            if (current.getName().equals(name)) {
+                results = results.concat(current.getEntry());
             }
         }
         return results;

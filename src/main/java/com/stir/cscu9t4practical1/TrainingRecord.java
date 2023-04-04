@@ -71,6 +71,18 @@ public class TrainingRecord {
         return results;
     }
 
+    public void removeEntry(String name, int d, int m, int y) {
+        ListIterator<Entry> iter = tr.listIterator();
+        String results = "";
+        while (iter.hasNext()) {
+            Entry current = iter.next();
+            if (current.getName().equals(name) && (current.getDay() == d)
+                    && (current.getMonth() == m) && (current.getYear() == y)) {
+                tr.remove(current);
+            }
+        }
+    }
+
     // Count the number of entries
     public int getNumberOfEntries() {
         return tr.size();

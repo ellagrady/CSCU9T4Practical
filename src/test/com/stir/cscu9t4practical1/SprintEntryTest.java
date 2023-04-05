@@ -1,37 +1,37 @@
-/*
+package com.stir.cscu9t4practical1;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.stir.cscu9t4practical1;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
+ * This code implements tests for the SprintEntry class
  *
  * @author saemundur
+ * @StudentNumber 3122142
+ * @date April 5, 2023
  */
 public class SprintEntryTest {
-    
+
     public SprintEntryTest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -42,7 +42,7 @@ public class SprintEntryTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        Entry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, 2);
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, "sprints", 2);
         String expResult = "Alice";
         String result = instance.getName();
         assertEquals(expResult, result);
@@ -54,7 +54,7 @@ public class SprintEntryTest {
     @Test
     public void testGetDay() {
         System.out.println("getDay");
-        Entry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, 2);
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, "sprints", 2);
         int expResult = 1;
         int result = instance.getDay();
         assertEquals(expResult, result);
@@ -66,7 +66,7 @@ public class SprintEntryTest {
     @Test
     public void testGetMonth() {
         System.out.println("getMonth");
-        Entry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, 2);
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, "sprints", 2);
         int expResult = 2;
         int result = instance.getMonth();
         assertEquals(expResult, result);
@@ -78,7 +78,7 @@ public class SprintEntryTest {
     @Test
     public void testGetYear() {
         System.out.println("getYear");
-        Entry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, 2);
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, "sprints", 2);
         int expResult = 2003;
         int result = instance.getYear();
         assertEquals(expResult, result);
@@ -90,7 +90,7 @@ public class SprintEntryTest {
     @Test
     public void testGetHour() {
         System.out.println("getHour");
-        Entry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, 2);
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, "sprints", 2);
         int expResult = 0;
         int result = instance.getHour();
         assertEquals(expResult, result);
@@ -102,7 +102,7 @@ public class SprintEntryTest {
     @Test
     public void testGetMin() {
         System.out.println("getMin");
-        Entry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, 2);
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, "sprints", 2);
         int expResult = 16;
         int result = instance.getMin();
         assertEquals(expResult, result);
@@ -114,7 +114,7 @@ public class SprintEntryTest {
     @Test
     public void testGetSec() {
         System.out.println("getSec");
-        Entry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, 2);
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, "sprints", 2);
         int expResult = 7;
         int result = instance.getSec();
         assertEquals(expResult, result);
@@ -126,33 +126,45 @@ public class SprintEntryTest {
     @Test
     public void testGetDistance() {
         System.out.println("getDistance");
-        Entry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, 2);
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 3.0F, 4, "sprints", 2);
         float expResult = 3.0F;
         float result = instance.getDistance();
         assertEquals(expResult, result, 0.0);
     }
-    
+
     /**
      * Test of getRepetitions method of class SprintEntry
      */
     @Test
     public void testGetRepetitions() {
         System.out.println("getRepetitions");
-        Entry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, 2);
-        int expResults = 4;
-        int result = instance.getRepetitions();
-        assertEquals(expResult, result);
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, "sprints", 2);
+        int expected = 4;
+        int result = instance.getReps();
+        assertEquals(expected, result);
     }
-    
+
     /**
      * Test of getRecovery method of class SprintEntry
      */
     @Test
     public void testGetRecovery() {
         System.out.println("getRepetitions");
-        Entry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, 2);
-        int expResults = 2;
-        int result = instance.getRecovery();
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, "sprints", 2);
+        int expResult = 2;
+        int result = instance.getRecoveryTime();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getSprintVSRun method, of class Sprint Entry
+     */
+    @Test
+    public void testGetSprintvsRun() {
+        System.out.println("getSprintsVSRun");
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, "sprints", 2);
+        String expResult = "sprints";
+        String result = instance.getSprintVSRun();
         assertEquals(expResult, result);
     }
 
@@ -162,10 +174,18 @@ public class SprintEntryTest {
     @Test
     public void testGetEntry() {
         System.out.println("getEntry");
-        Entry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, 2);
-        String expResult = "Alice sprinted 4x300m in 0:16:7 with 2 minutes recovery on 1/2/2003\n";
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 0.5F, 4, "sprints", 2);
+        String expResult = "Alice ran 4 * 0.5 km sprints (with 2 minutes recovery between) in 0:16:7 on 1/2/2003\n";
         String result = instance.getEntry();
         assertEquals(expResult, result);
+
+        System.out.println("getEntry");
+        SprintEntry instance2 = new SprintEntry("Alice", 1, 3, 2003, 1, 5, 13, 8, 1, "distance", 0);
+        String expResult2 = "Alice ran a 1 * 8.0km run in 1:5:13 on 1/3/2003\n";
+        String result2 = instance2.getEntry();
+        assertEquals(expResult2, result2);
+
+
     }
-    
+
 }

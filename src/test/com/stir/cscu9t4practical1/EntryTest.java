@@ -1,38 +1,35 @@
-/*
+package com.stir.cscu9t4practical1;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.stir.cscu9t4practical1;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
 
 /**
+ * This code implements tests for the Entry class
  *
  * @author saemundur
+ * @StudentNumber 3122142
+ * @date April 5, 2023
  */
 public class EntryTest {
-    
+
     public EntryTest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -46,7 +43,7 @@ public class EntryTest {
         Entry instance = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         String expResult = "Alice";
         String result = instance.getName();
-        assertEquals(expResult, result);
+        Assertions.assertEquals(expResult, result);
     }
 
     /**
@@ -58,7 +55,7 @@ public class EntryTest {
         Entry instance = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         int expResult = 1;
         int result = instance.getDay();
-        assertEquals(expResult, result);
+        Assertions.assertEquals(expResult, result);
     }
 
     /**
@@ -70,7 +67,7 @@ public class EntryTest {
         Entry instance = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         int expResult = 2;
         int result = instance.getMonth();
-        assertEquals(expResult, result);
+        Assertions.assertEquals(expResult, result);
     }
 
     /**
@@ -82,7 +79,7 @@ public class EntryTest {
         Entry instance = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         int expResult = 2003;
         int result = instance.getYear();
-        assertEquals(expResult, result);
+        Assertions.assertEquals(expResult, result);
     }
 
     /**
@@ -94,7 +91,7 @@ public class EntryTest {
         Entry instance = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         int expResult = 0;
         int result = instance.getHour();
-        assertEquals(expResult, result);
+        Assertions.assertEquals(expResult, result);
     }
 
     /**
@@ -106,7 +103,7 @@ public class EntryTest {
         Entry instance = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         int expResult = 16;
         int result = instance.getMin();
-        assertEquals(expResult, result);
+        Assertions.assertEquals(expResult, result);
     }
 
     /**
@@ -118,7 +115,7 @@ public class EntryTest {
         Entry instance = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         int expResult = 7;
         int result = instance.getSec();
-        assertEquals(expResult, result);
+        Assertions.assertEquals(expResult, result);
     }
 
     /**
@@ -130,7 +127,7 @@ public class EntryTest {
         Entry instance = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         float expResult = 3.0F;
         float result = instance.getDistance();
-        assertEquals(expResult, result, 0.0);
+        Assertions.assertEquals(expResult, result, 0.0);
     }
 
     /**
@@ -142,7 +139,7 @@ public class EntryTest {
         Entry instance = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         String expResult = "Alice ran 3.0 km in 0:16:7 on 1/2/2003\n";
         String result = instance.getEntry();
-        assertEquals(expResult, result);
+        Assertions.assertEquals(expResult, result);
     }
-    
+
 }

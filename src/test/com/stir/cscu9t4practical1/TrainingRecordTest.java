@@ -7,7 +7,11 @@ package com.stir.cscu9t4practical1;/*
 import org.junit.jupiter.api.*;
 
 /**
+ * This code implements tests for the TrainingRecord class
+ *
  * @author saemundur
+ * @StudentNumber 3122142
+ * @date April 5, 2023
  */
 public class TrainingRecordTest {
     public TrainingRecordTest() {

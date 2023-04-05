@@ -6,6 +6,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This code implements the TrainingRecordGUI class, extended from JFrame, implementing ActionListener
+ * to create the GUI window for TrainingRecord
+ * includes constructor, recordCheckerGUI(), actionPerformed(ActionEvent event),
+ * removeFields(), addEntry(String what), lookupEntry(), findAllByDate(),
+ * searchByName(), removeEntry(), blankDisplay(), and fillDisplay(Entry ent, Stirng record)
+ *
+ * @author 3122142
+ * @date April 5, 2023
+ */
 public class TrainingRecordGUI extends JFrame implements ActionListener {
 
     private JTextField recordType = new JTextField(10); // field for swim/cycle/run
@@ -64,11 +74,18 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
 
     private JTextArea outputArea = new JTextArea(5, 50);
 
+    /**
+     * main method
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         TrainingRecordGUI applic = new TrainingRecordGUI();
     } // main
 
-    // set up the GUI
+    /**
+     * set up the GUI
+     */
     public TrainingRecordGUI() {
         super("Training Record");
         frame.setLayout(new FlowLayout());
@@ -124,12 +141,15 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
 
     } // constructor
 
-    private String record;
+    private String record; // global variable for record type
 
-    // creates cases so depending on what type of training record is being added, fields are added
-    //  makes it so window would be less cluttered by irrelevant fields, checks against string entry
-    //  in record field
-    private String recordCheckerGUI() {
+    /**
+     * creates cases so depending on what type of training record is being added, fields are added
+     * makes it so window would be less cluttered by irrelevant fields, checks against string entry
+     * in record field
+     */
+
+    private void recordCheckerGUI() {
         record = recordType.getText();
         switch (record) {
             case "swim": // if it is a swim entry add relevant fields for swim
@@ -166,7 +186,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
                 recovery.setEditable(true);
                 break;
             default: // if none added do nothing
-                return null;
+                return;
         }
         frame.add(addR);
         addR.addActionListener(this);
@@ -174,10 +194,13 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         newRecord.addActionListener(this);
         frame.add(outputArea);
         outputArea.setEditable(false);
-        return record;
     }
 
-    // listen for and respond to GUI events
+    /**
+     * listen for and respond to GUI events
+     *
+     * @param event button to be acted upon
+     */
     public void actionPerformed(ActionEvent event) {
         String message = "";
 
@@ -186,7 +209,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
 
         }
         if (event.getSource() == enter) { // when session type added and enter pressed
-            message = recordCheckerGUI();
+            recordCheckerGUI();
         }
         if (event.getSource() == newRecord) {
             removeFields();
@@ -202,15 +225,17 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
             message = searchByName();
         }
         if (event.getSource() == remove) {
-            message = removeEntry();
+            removeEntry();
         }
 
         outputArea.setText(message);
         blankDisplay();
     } // actionPerformed
 
-    // removes training type specific fields after new entry button is selected
-    //  helps to keep gui window less cluttered by irrelevant fields
+    /**
+     * removes training type specific fields after new entry button is selected
+     * helps to keep gui window less cluttered by irrelevant fields
+     */
     private void removeFields() {
         record = recordType.getText();
         switch (record) {
@@ -251,8 +276,12 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
 
     }
 
-    // adds a new entry from input to fields
-
+    /**
+     * adds a new entry from input to fields
+     *
+     * @param what "generic"
+     * @return string message
+     */
     public String addEntry(String what) {
         String message = "";
         System.out.println("Adding " + what + " entry to the records");
@@ -437,46 +466,58 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         return message;
     }
 
-    // method called by Look Up button to look up entry, returns last entry with given date
+    /**
+     * method called by Look Up button to look up entry, returns last entry with given date
+     *
+     * @return output of myAthletes.lookupEntry(d,m,y)
+     */
     public String lookupEntry() {
         int m = Integer.parseInt(month.getText());
         int d = Integer.parseInt(day.getText());
         int y = Integer.parseInt(year.getText());
         outputArea.setText("looking up record ...");
-        String message = myAthletes.lookupEntry(d, m, y);
-        return message;
+        return myAthletes.lookupEntry(d, m, y);
     }
 
-    // method called by Find By Date button to return all entries on given date
+    /**
+     * method called by Find By Date button to return all entries on given date
+     *
+     * @return output of myAthletes.findAllbyDate(d,m,y)
+     */
     public String findAllByDate() {
         int m = Integer.parseInt(month.getText());
         int d = Integer.parseInt(day.getText());
         int y = Integer.parseInt(year.getText());
         outputArea.setText("looking up records ...");
-        String message = myAthletes.findAllbyDate(d, m, y);
-        return message;
+        return myAthletes.findAllbyDate(d, m, y);
     }
 
-    // method called by Find By Name button, returns all records under given name
+    /**
+     * method called by Find By Name button, returns all records under given name
+     *
+     * @return output of myAthletes.searchByName(n)
+     */
     public String searchByName() {
         String n = name.getText();
         n = n.toLowerCase();
         outputArea.setText("looking up records ...");
-        String message = myAthletes.searchByName(n);
-        return message;
+        return myAthletes.searchByName(n);
     }
 
-    // method called by Remove button, removes entry of given name and date
-    public String removeEntry() {
+    /**
+     * method called by Remove button, removes entry of given name and date
+     **/
+    public void removeEntry() {
         String n = name.getText();
         int m = Integer.parseInt(month.getText());
         int d = Integer.parseInt(day.getText());
         int y = Integer.parseInt(year.getText());
         outputArea.setText("deleting record ...");
         myAthletes.removeEntry(n, d, m, y);
-        return "";
     }
 
+    /* sets all fields to blank
+     */
     public void blankDisplay() {
         name.setText("");
         day.setText("");
@@ -489,7 +530,12 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
 
     }// blankDisplay
 
-    // Fills the input fields on the display for testing purposes only
+    /**
+     * Fills the input fields on the display for testing purposes only
+     *
+     * @param ent    entry input
+     * @param record string input of record type
+     */
     public void fillDisplay(Entry ent, String record) {
         recordType.setText(record);
         name.setText(ent.getName());

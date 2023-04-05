@@ -14,7 +14,11 @@ import java.util.Arrays;
 
 
 /**
+ * This code implements tests for the TrainingRecordGUI class
+ *
  * @author saemundur
+ * @StudentNumber 3122142
+ * @date April 5, 2023
  */
 public class TrainingRecordGUITest {
 

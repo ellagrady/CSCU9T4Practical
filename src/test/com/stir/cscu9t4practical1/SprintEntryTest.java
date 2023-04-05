@@ -9,7 +9,11 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
+ * This code implements tests for the SprintEntry class
+ *
  * @author saemundur
+ * @StudentNumber 3122142
+ * @date April 5, 2023
  */
 public class SprintEntryTest {
 

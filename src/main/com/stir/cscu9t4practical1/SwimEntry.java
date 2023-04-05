@@ -39,9 +39,15 @@ public class SwimEntry extends Entry {
                     " laps in " + getHour() + ":" + getMin() + ":" + getSec() + " on "
                     + getDay() + "/" + getMonth() + "/" + getYear() + "\n";
         } else {
-            out = getName() + " swam " + getDistance() + " km across " + laps + " laps in " + getHour()
-                    + ":" + getMin() + ":" + getSec() + " on " + getDay() + "/" + getMonth() + "/"
-                    + getYear() + "\n";
+            if (poolVSOutdoors.equals("pool")) {
+                out = getName() + " swam " + getDistance() + " km distance " + laps + " laps in " + getHour()
+                        + ":" + getMin() + ":" + getSec() + " on " + getDay() + "/" + getMonth() + "/"
+                        + getYear() + "\n";
+            } else {
+                out = getName() + " swam " + getDistance() + " km distance outdoors in " + getHour()
+                        + ":" + getMin() + ":" + getSec() + " on " + getDay() + "/" + getMonth() + "/"
+                        + getYear() + "\n";
+            }
         }
         return out;
     }

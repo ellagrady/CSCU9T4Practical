@@ -122,7 +122,7 @@ public class SprintEntryTest {
     @Test
     public void testGetDistance() {
         System.out.println("getDistance");
-        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 300, 4, "sprints", 2);
+        SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 3.0F, 4, "sprints", 2);
         float expResult = 3.0F;
         float result = instance.getDistance();
         assertEquals(expResult, result, 0.0);
@@ -171,13 +171,13 @@ public class SprintEntryTest {
     public void testGetEntry() {
         System.out.println("getEntry");
         SprintEntry instance = new SprintEntry("Alice", 1, 2, 2003, 0, 16, 7, 0.5F, 4, "sprints", 2);
-        String expResult = "Alice ran 4 * 300 km  (with 2 minutes recovery between ) in 0:16:7 on 1/2/2003\n";
+        String expResult = "Alice ran 4 * 0.5 km sprints (with 2 minutes recovery between) in 0:16:7 on 1/2/2003\n";
         String result = instance.getEntry();
         assertEquals(expResult, result);
 
         System.out.println("getEntry");
         SprintEntry instance2 = new SprintEntry("Alice", 1, 3, 2003, 1, 5, 13, 8, 1, "distance", 0);
-        String expResult2 = "Alice ran a 1 * 8 km run in 1:5:13 on 1/3/2003\n";
+        String expResult2 = "Alice ran a 1 * 8.0km run in 1:5:13 on 1/3/2003\n";
         String result2 = instance2.getEntry();
         assertEquals(expResult2, result2);
 

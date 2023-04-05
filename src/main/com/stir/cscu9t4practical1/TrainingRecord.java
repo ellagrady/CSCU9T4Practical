@@ -16,18 +16,66 @@ public class TrainingRecord {
 
     // add a record to the list
     public void addEntry(Entry e) {
+        int d = e.getDay();
+        int m = e.getMonth();
+        int y = e.getYear();
+        String name = e.getName();
+        String find = findAllbyDate(d, m, y);
+        String[] entries = find.split("\n");
+        for (String entry : entries) {
+            String[] record = entry.split(" ");
+            if (record[0].equals(name)) {
+                return;
+            }
+        }
         tr.add(e);
     } // addClass
 
     public void addEntry(SwimEntry e) {
+        int d = e.getDay();
+        int m = e.getMonth();
+        int y = e.getYear();
+        String name = e.getName();
+        String find = findAllbyDate(d, m, y);
+        String[] entries = find.split("\n");
+        for (String entry : entries) {
+            String[] record = entry.split(" ");
+            if (record[0].equals(name)) {
+                return;
+            }
+        }
         tr.add(e);
     }
 
     public void addEntry(CycleEntry e) {
+        int d = e.getDay();
+        int m = e.getMonth();
+        int y = e.getYear();
+        String name = e.getName();
+        String find = findAllbyDate(d, m, y);
+        String[] entries = find.split("\n");
+        for (String entry : entries) {
+            String[] record = entry.split(" ");
+            if (record[0].equals(name)) {
+                return;
+            }
+        }
         tr.add(e);
     }
 
     public void addEntry(SprintEntry e) {
+        int d = e.getDay();
+        int m = e.getMonth();
+        int y = e.getYear();
+        String name = e.getName();
+        String find = findAllbyDate(d, m, y);
+        String[] entries = find.split("\n");
+        for (String entry : entries) {
+            String[] record = entry.split(" ");
+            if (record[0].equals(name)) {
+                return;
+            }
+        }
         tr.add(e);
     }
 

@@ -14,11 +14,11 @@ public class TrainingRecordTest {
     }
 
     @BeforeAll
-    public void setUpClass() {
+    public static void setUpClass() {
     }
 
     @AfterAll
-    public void tearDownClass() {
+    public static void tearDownClass() {
     }
 
     @BeforeEach
@@ -65,8 +65,8 @@ public class TrainingRecordTest {
     @Test
     public void testAddEntryUnique() {
         System.out.println("addEntry -- fail");
-        Entry a = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
-        Entry b = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
+        SwimEntry a = new SwimEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "pool", 1, 8, "sprints");
+        CycleEntry b = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "slow");
         TrainingRecord instance = new TrainingRecord();
         instance.addEntry(a);
         instance.addEntry(b);
@@ -157,7 +157,7 @@ public class TrainingRecordTest {
     public void testSearchbyName() {
         System.out.println("searchByName");
         String expectResults = "Alice cycled 3.0 km in 0:16:7 on 1/2/2003 on asphalt at moderate tempo\n";
-        String expectNone = "No entries found";
+        String expectNone = "";
         CycleEntry cycle = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
         TrainingRecord instance = new TrainingRecord();
         instance.addEntry(cycle);

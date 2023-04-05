@@ -156,7 +156,7 @@ public class SwimEntryTest {
 
         System.out.println("getEntry");
         SwimEntry instance2 = new SwimEntry("Alice", 1, 3, 2003, 0, 15, 12, 5, "pool", 1, 5, "sprints");
-        String expResult2 = "Alice swam 5.0 km sprints (with 1 minutes recovery between) across 5 laps in 0:15:12 on 1/3/2003\n ";
+        String expResult2 = "Alice swam 5.0 km sprints (with 1 minutes recovery between) across 5 laps in 0:15:12 on 1/3/2003\n";
         String result2 = instance2.getEntry();
         Assertions.assertEquals(expResult2, result2);
     }

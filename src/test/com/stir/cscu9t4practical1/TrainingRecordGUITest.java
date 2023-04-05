@@ -1,10 +1,9 @@
-/*
+package com.stir.cscu9t4practical1;/*
  * Test class for TrainingRecordGUI
  * It is not finished as we're not expecting you to implement GUI testing
  * However, you're welcome to use this starter template and extend it and add
  * test for public methods you implement in TrainingRecordGUI.java
  */
-package com.stir.cscu9t4practical1;
 
 import org.junit.jupiter.api.*;
 
@@ -12,8 +11,6 @@ import javax.swing.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -48,7 +45,7 @@ public class TrainingRecordGUITest {
     public void testMain() {
         System.out.println("main");
         String[] args = null;
-        TrainingRecordGUI.main(args);
+        com.stir.cscu9t4practical1.TrainingRecordGUI.main(args);
     }
 
     /**
@@ -77,12 +74,12 @@ public class TrainingRecordGUITest {
     @Test
     public void testAddEntry() {
         System.out.println("addEntry");
-        TrainingRecordGUI instance = new TrainingRecordGUI();
-        Entry entry = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
-        instance.fillDisplay(entry);
+        com.stir.cscu9t4practical1.TrainingRecordGUI instance = new com.stir.cscu9t4practical1.TrainingRecordGUI();
+        CycleEntry entry = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
+        instance.fillDisplay(entry, "cycle");
         String message = instance.addEntry("generic");
         System.out.println(message);
-        Assertions.assertEquals(message, "Record added\n");
+        Assertions.assertEquals(message, "Record added");
     }
 
     /**
@@ -91,9 +88,9 @@ public class TrainingRecordGUITest {
     @Test
     public void testButtonsPresentInGUI() throws IllegalAccessException, IllegalArgumentException {
         System.out.println("Check if you have added the buttons");
-        TrainingRecordGUI instance = new TrainingRecordGUI();
+        com.stir.cscu9t4practical1.TrainingRecordGUI instance = new com.stir.cscu9t4practical1.TrainingRecordGUI();
         Class<?> instanceClass = instance.getClass();
-        String[] expectedFields = {"findAllByDate", "lookUpByDate"}; // add RemoveEntry when it is ready
+        String[] expectedFields = {"FindAllByDate", "findByName", "remove", "addR", "enter"};
         Field fields[] = instanceClass.getDeclaredFields();
         int found = 0;
         for (Field field : fields) {

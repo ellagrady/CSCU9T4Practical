@@ -1,9 +1,8 @@
-/*
+package com.stir.cscu9t4practical1;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.stir.cscu9t4practical1;
 
 import org.junit.jupiter.api.*;
 
@@ -37,11 +36,26 @@ public class TrainingRecordTest {
      */
     @Test
     public void testAddEntry() {
-        System.out.println("addEntry");
+        System.out.println("addEntry(Entry e)");
         Entry a = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         TrainingRecord instance = new TrainingRecord();
         instance.addEntry(a);
         Assertions.assertEquals(instance.getNumberOfEntries(), 1);
+
+        System.out.println("addEntry(SwimEntry e)");
+        SwimEntry swim = new SwimEntry("Alice", 1, 3, 2003, 0, 15, 12, 5, "pool", 1, 5, "sprints");
+        instance.addEntry(swim);
+        Assertions.assertEquals(instance.getNumberOfEntries(), 2);
+
+        System.out.println("addEntry(CycleEntry e)");
+        CycleEntry cycle = new CycleEntry("Alice", 1, 4, 2003, 0, 16, 7, 3, "asphalt", "moderate");
+        instance.addEntry(cycle);
+        Assertions.assertEquals(instance.getNumberOfEntries(), 3);
+
+        System.out.println("addEntry(SprintEntry e)");
+        SprintEntry sprint = new SprintEntry("Alice", 1, 5, 2003, 0, 16, 7, 300, 4, "sprints", 2);
+        instance.addEntry(sprint);
+        Assertions.assertEquals(instance.getNumberOfEntries(), 4);
     }
 
     /**
@@ -68,7 +82,7 @@ public class TrainingRecordTest {
     @Test
     public void testLookupEntry() {
         System.out.println("lookupEntry");
-        TrainingRecord instance = new TrainingRecord();
+        com.stir.cscu9t4practical1.TrainingRecord instance = new com.stir.cscu9t4practical1.TrainingRecord();
         String expResult = "No entries found";
         Entry a = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         Entry b = new Entry("Bob", 1, 2, 2003, 0, 14, 15, 3);
@@ -93,7 +107,7 @@ public class TrainingRecordTest {
     @Test
     public void testGetNumberOfEntries() {
         System.out.println("GetNumberOfEntries");
-        TrainingRecord instance = new TrainingRecord();
+        com.stir.cscu9t4practical1.TrainingRecord instance = new com.stir.cscu9t4practical1.TrainingRecord();
         Entry a = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         Entry b = new Entry("Bob", 1, 2, 2003, 0, 14, 15, 3);
         Entry c1 = new Entry("Claire", 7, 3, 2010, 0, 26, 20, 7);
@@ -110,14 +124,14 @@ public class TrainingRecordTest {
     }
 
     /**
-     * Test of yet to be implemented lookupEntries, of class TrainingRecord
+     * Test of yet to be implemented findAllbyDate, of class TrainingRecord
      * Implement the method and then remove the "fail" line below and
      * un-comment call to the method and the assertion line
      */
     @Test
-    public void testLookupEntries() {
-        System.out.println("lookupEntries");
-        String expectResultsNone = "Sorry couldn't find anything for this date";
+    public void testFindAllbyDate() {
+        System.out.println("findAllbyDate");
+        String expectResultsNone = "";
         String expectResults = "Alice ran 3.0 km in 0:16:7 on 1/2/2003\n" +
                 "Bob ran 3.0 km in 0:14:15 on 1/2/2003\n";
         TrainingRecord instance = new TrainingRecord();
@@ -125,15 +139,71 @@ public class TrainingRecordTest {
         Entry b = new Entry("Bob", 1, 2, 2003, 0, 14, 15, 3);
         instance.addEntry(a);
         instance.addEntry(b);
-        Assertions.fail("This method cannot be tested as it does not exist yet");
+        // Assertions.fail("This method cannot be tested as it does not exist yet");
         int d = 1;
         int m = 2;
         int y = 2003;
         // un-comment the lines below when you've implemented the method
-//        String resultSuccess = instance.lookupEntries(d,m,y);
-//        String resultNone = instance.lookupEntries(d,m,1999);
-//        assertEquals(expectResultsNone,resultNone);
-//        assertEquals(expectResults,resultSuccess);
+        String resultSuccess = instance.findAllbyDate(d, m, y);
+        String resultNone = instance.findAllbyDate(d, m, 1999);
+        Assertions.assertEquals(expectResultsNone, resultNone);
+        Assertions.assertEquals(expectResults, resultSuccess);
+    }
+
+    /**
+     * Test of searchByName method, of TrainingRecord class.
+     */
+    @Test
+    public void testSearchbyName() {
+        System.out.println("searchByName");
+        String expectResults = "Alice cycled 3.0 km in 0:16:7 on 1/2/2003 on asphalt at moderate tempo\n";
+        String expectNone = "No entries found";
+        CycleEntry cycle = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
+        TrainingRecord instance = new TrainingRecord();
+        instance.addEntry(cycle);
+        SprintEntry sprint = new SprintEntry("John", 1, 3, 2003, 1, 5, 13, 8, 1, "distance", 0);
+        String expResult2 = "John ran a 1 * 8 km run in 1:5:13 on 1/3/2003\n";
+        instance.addEntry(sprint);
+        String alice = "Alice";
+        String bob = "Bob";
+        String resultSuccess = instance.searchByName(alice);
+        String resultNone = instance.searchByName(bob);
+        Assertions.assertEquals(expectNone, resultNone);
+        Assertions.assertEquals(expectResults, resultSuccess);
+    }
+
+    /**
+     * Test of removeEntry method, of class TrainingRecord
+     */
+    @Test
+    public void testRemoveEntry() {
+        System.out.println("removeEntry");
+        int expectedLength = 1;
+        CycleEntry cycle = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
+        TrainingRecord instance = new TrainingRecord();
+        instance.addEntry(cycle);
+        SprintEntry sprint = new SprintEntry("John", 1, 3, 2003, 1, 5, 13, 8, 1, "distance", 0);
+        instance.addEntry(sprint);
+        instance.removeEntry("Alice", 1, 2, 2003);
+        int newLength = instance.getNumberOfEntries();
+        Assertions.assertEquals(expectedLength, newLength);
+    }
+
+    /**
+     * Test of clearAllEntries method, of class TrainingRecord
+     */
+    @Test
+    public void testClearAll() {
+        System.out.println("clearAllEntries");
+        int expectedLength = 0;
+        CycleEntry cycle = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
+        TrainingRecord instance = new TrainingRecord();
+        instance.addEntry(cycle);
+        SprintEntry sprint = new SprintEntry("John", 1, 3, 2003, 1, 5, 13, 8, 1, "distance", 0);
+        instance.addEntry(sprint);
+        instance.clearAllEntries();
+        int newLength = instance.getNumberOfEntries();
+        Assertions.assertEquals(expectedLength, newLength);
     }
 
 }

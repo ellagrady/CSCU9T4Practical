@@ -1,9 +1,8 @@
-/*
+package com.stir.cscu9t4practical1;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.stir.cscu9t4practical1;
 
 import org.junit.jupiter.api.*;
 
@@ -133,7 +132,7 @@ public class CycleEntryTest {
     @Test
     public void testGetTerrain() {
         System.out.println("getTerrain");
-        Entry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
+        CycleEntry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
         String expResult = "asphalt";
         String result = instance.getTerrain();
         Assertions.assertEquals(expResult, result);
@@ -145,7 +144,7 @@ public class CycleEntryTest {
     @Test
     public void testGetTempo() {
         System.out.println("getTempo");
-        Entry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
+        CycleEntry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
         String expResult = "moderate";
         String result = instance.getTempo();
         Assertions.assertEquals(expResult, result);

@@ -7,15 +7,17 @@ import java.util.ListIterator;
 
 
 public class TrainingRecord {
-    private List<Entry> tr;
+    private List<Entry> tr; // list to hold Entry objects
 
+    // constructor, creates empty list for Entry objects
     public TrainingRecord() {
         tr = new ArrayList<Entry>();
-    } //constructor
+    }
 
 
-    // add a record to the list
+    // add a unique record to the list
     public void addEntry(Entry e) {
+        // checks entry is unique
         int d = e.getDay();
         int m = e.getMonth();
         int y = e.getYear();
@@ -31,7 +33,9 @@ public class TrainingRecord {
         tr.add(e);
     } // addClass
 
+    // adds a unique SwimEntry to list
     public void addEntry(SwimEntry e) {
+        // checks entry is unique
         int d = e.getDay();
         int m = e.getMonth();
         int y = e.getYear();
@@ -47,7 +51,9 @@ public class TrainingRecord {
         tr.add(e);
     }
 
+    // adds a unique CycleEntry to list
     public void addEntry(CycleEntry e) {
+        // checks entry is unique
         int d = e.getDay();
         int m = e.getMonth();
         int y = e.getYear();
@@ -63,7 +69,9 @@ public class TrainingRecord {
         tr.add(e);
     }
 
+    // adds a unique SprintEntry to list
     public void addEntry(SprintEntry e) {
+        // checks entry is unique
         int d = e.getDay();
         int m = e.getMonth();
         int y = e.getYear();
@@ -93,20 +101,21 @@ public class TrainingRecord {
     } // lookupEntry
 
     // look up all entries of a given day and month
-    // returns all the entries in a single string
+    // returns all the entries as a single string
     public String findAllbyDate(int d, int m, int y) {
         ListIterator<Entry> iter = tr.listIterator();
-        //List<String> results = new ArrayList<String>();
         String results = "";
         while (iter.hasNext()) {
             Entry current = iter.next();
             if (current.getDay() == d && current.getMonth() == m && current.getYear() == y) {
-                results += (current.getEntry());
+                results = results.concat(current.getEntry());
             }
         }
         return results;
     }
 
+    // look up all entries under a given day
+    // returns all the entries as a single string
     public String searchByName(String name) {
         ListIterator<Entry> iter = tr.listIterator();
         String results = "";
@@ -119,6 +128,7 @@ public class TrainingRecord {
         return results;
     }
 
+    // removes the entry under given name and date from list
     public void removeEntry(String name, int d, int m, int y) {
         ListIterator<Entry> iter = tr.listIterator();
         while (iter.hasNext()) {

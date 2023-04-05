@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class TrainingRecordGUI extends JFrame implements ActionListener {
 
-    private JTextField recordType = new JTextField(10);
+    private JTextField recordType = new JTextField(10); // field for swim/cycle/run
     private JLabel recordLabel = new JLabel("Session Type:");
     private JButton newRecord = new JButton("New Entry");
     private JTextField name = new JTextField(30);
@@ -121,8 +121,6 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         frame.setVisible(true);
         blankDisplay();
 
-        // To save typing in new entries while testing, uncomment
-        // the following lines (orframe.add your own test cases)
 
     } // constructor
 
@@ -134,7 +132,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private String recordCheckerGUI() {
         record = recordType.getText();
         switch (record) {
-            case "swim":
+            case "swim": // if it is a swim entry add relevant fields for swim
                 frame.add(lapLabel);
                 frame.add(laps);
                 laps.setEditable(true);
@@ -148,7 +146,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
                 frame.add(recovery);
                 recovery.setEditable(true);
                 break;
-            case "cycle":
+            case "cycle": // if cycling entry add relevant fields
                 frame.add(terrainLabel);
                 frame.add(terrain);
                 terrain.setEditable(true);
@@ -156,7 +154,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
                 frame.add(tempo);
                 tempo.setEditable(true);
                 break;
-            case "run":
+            case "run": // if running entry add relevant fields
                 frame.add(repsLabel);
                 frame.add(reps);
                 reps.setEditable(true);
@@ -167,11 +165,8 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
                 frame.add(recovery);
                 recovery.setEditable(true);
                 break;
-            default:
-                frame.add(outputArea);
-                outputArea.setEditable(false);
-                outputArea.setText("Invalid training session type");
-                return "";
+            default: // if none added do nothing
+                return null;
         }
         frame.add(addR);
         addR.addActionListener(this);
@@ -185,15 +180,12 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     // listen for and respond to GUI events
     public void actionPerformed(ActionEvent event) {
         String message = "";
-        //if (event.getSource() == enter) {
-        //      recordCheckerGUI();
 
-        // }
         if (event.getSource() == addR) {
             message = addEntry("generic");
 
         }
-        if (event.getSource() == enter) {
+        if (event.getSource() == enter) { // when session type added and enter pressed
             message = recordCheckerGUI();
         }
         if (event.getSource() == newRecord) {
@@ -222,7 +214,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private void removeFields() {
         record = recordType.getText();
         switch (record) {
-            case "swim":
+            case "swim": // removes fields relevant to swim
                 frame.remove(lapLabel);
                 frame.remove(laps);
                 frame.remove(sprintsSwimLabel);
@@ -234,7 +226,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
                 frame.remove(newRecord);
                 frame.repaint();
                 break;
-            case "cycle":
+            case "cycle": // removes fields relevant to cycle
                 frame.remove(terrainLabel);
                 frame.remove(terrain);
                 frame.remove(tempoLabel);
@@ -242,7 +234,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
                 frame.remove(newRecord);
                 frame.repaint();
                 break;
-            case "run":
+            case "run": // removes fields relevant to run
                 frame.remove(repsLabel);
                 frame.remove(reps);
                 frame.remove(sprintsRunLabel);
@@ -255,82 +247,106 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
             default:
                 frame.remove(outputArea);
                 frame.repaint();
-                return;
         }
 
     }
+
+    // adds a new entry from input to fields
 
     public String addEntry(String what) {
         String message = "";
         System.out.println("Adding " + what + " entry to the records");
         String n = name.getText();
         record = recordType.getText();
-        /* System.out.println(n.length());
-        if (n.length() == 0) {
-            message = "Name should not be an empty string";
-            return message;
-        } */
 
-        int m = 0;
-        int d = 0;
-        int y = 0;
-        try {
-            m = Integer.parseInt(month.getText());
-        } catch (NumberFormatException excp) {
-            System.out.println("Incorrect type of month input, should be in integer format");
-            return "";
+        int m = 0; // month
+        int d = 0; // day
+        int y = 0; // year
+
+        // ensures input is valid
+        if (!(month.getText()).isEmpty()) {
+            try {
+                m = Integer.parseInt(month.getText());
+                // System.out.println("month: " + m);
+            } catch (NumberFormatException excp) {
+                System.out.println("Incorrect type of month input, should be in integer format");
+                message = "Incorrect type of month input, should be in integer format";
+                outputArea.setText(message);
+                return message;
+            }
         }
-        try {
-            d = Integer.parseInt(day.getText());
-        } catch (NumberFormatException excp) {
-            System.out.println("Incorrect type of day input, should be in integer format");
-            message = "Incorrect type of day input, should be in integer format";
-            return message;
+        if (!(day.getText()).isEmpty()) {
+            try {
+                d = Integer.parseInt(day.getText());
+            } catch (NumberFormatException excp) {
+                System.out.println("Incorrect type of day input, should be in integer format");
+                message = "Incorrect type of day input, should be in integer format";
+                outputArea.setText(message);
+                return message;
+            }
         }
-        try {
-            y = Integer.parseInt(year.getText());
-        } catch (NumberFormatException excp) {
-            System.out.println("Incorrect type of year input, should be in integer format");
-            message = "Incorrect type of year input, should be in integer format";
-            return message;
+        if (!(year.getText()).isEmpty()) {
+            try {
+                y = Integer.parseInt(year.getText());
+            } catch (NumberFormatException excp) {
+                System.out.println("Incorrect type of year input, should be in integer format");
+                message = "Incorrect type of year input, should be in integer format";
+                outputArea.setText(message);
+                return message;
+            }
         }
         float km = 0;
-        try {
-            km = java.lang.Float.parseFloat(dist.getText());
-        } catch (NumberFormatException excp) {
-            System.out.println("Incorrect type of distance input, should be in numerical format");
-            message = "Incorrect type of distance input, should be in numerical format";
-            return message;
+        if (!(dist.getText()).isEmpty()) {
+            try {
+                km = java.lang.Float.parseFloat(dist.getText());
+            } catch (NumberFormatException excp) {
+                System.out.println("Incorrect type of distance input, should be in numerical format");
+                message = "Incorrect type of distance input, should be in numerical format";
+                outputArea.setText(message);
+                return message;
+            }
         }
-        int h = 0;
-        int mm = 0;
-        int s = 0;
-        try {
-            h = Integer.parseInt(hours.getText());
-        } catch (NumberFormatException excp) {
-            System.out.println("Incorrect type of hours input, should be in integer format");
-            message = "Incorrect type of hours input, should be in integer format";
-            return message;
+        int h = 0; // hours
+        int mm = 0; // minutes
+        int s = 0; // seconds
+
+        // ensures input is valid
+        if (!(hours.getText()).isEmpty()) {
+            try {
+                h = Integer.parseInt(hours.getText());
+            } catch (final NumberFormatException except) {
+                System.out.println("Incorrect type of hours input, should be in integer format");
+                message = "Incorrect type of hours input, should be in integer format";
+                outputArea.setText(message);
+                return message;
+            }
         }
-        try {
-            mm = Integer.parseInt(mins.getText());
-        } catch (NumberFormatException excp) {
-            System.out.println("Incorrect type of mins input, should be in integer format");
-            message = "Incorrect type of mins input, should be in integer format";
-            return message;
+        if (!(mins.getText()).isEmpty()) {
+            try {
+                mm = Integer.parseInt(mins.getText());
+            } catch (final NumberFormatException except) {
+                System.out.println("Incorrect type of mins input, should be in integer format");
+                message = "Incorrect type of mins input, should be in integer format";
+                outputArea.setText(message);
+                return message;
+            }
         }
-        try {
-            s = Integer.parseInt(secs.getText());
-        } catch (NumberFormatException excp) {
-            System.out.println("Incorrect type of seconds input, should be in integer format");
-            message = "Incorrect type of seconds input, should be in integer format";
-            return message;
+        if (!(secs.getText()).isEmpty()) {
+            try {
+                s = Integer.parseInt(secs.getText());
+            } catch (final NumberFormatException except) {
+                System.out.println("Incorrect type of seconds input, should be in integer format");
+                message = "Incorrect type of seconds input, should be in integer format";
+                outputArea.setText(message);
+                return message;
+            }
         }
-        String out = myAthletes.findAllbyDate(d, m, y);
-        System.out.println("out: " + out);
+        // checks that entry is unique
+        // String out = myAthletes.findAllbyDate(d, m, y);
+        // System.out.println("out: " + out);
         //String[] results = out.split("\n");
         // System.out.println("results length: " + results.length);
-        if (out.length() != 0) {
+        /* if (out.length() != 0) {
             String[] results = out.split("\n");
 
             for (String value : results) {
@@ -351,7 +367,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
                 System.out.println(date[0] + " " + date[1] + " " + date[2]);
                 System.out.println(d + " " + m + " " + y); */
 
-                System.out.println(recordType.getText() + " " + record);
+               /*  System.out.println(recordType.getText() + " " + record);
                 System.out.println(individualEntry[0] + " " + n + " " + individualEntry[2] + " " + km);
                 if (individualEntry[0].equals(n) && (Float.parseFloat(individualEntry[2]) == km)
                         && (Integer.parseInt(time[0]) == h) && (Integer.parseInt(time[1]) == mm) && (Integer.parseInt(time[2]) == s)
@@ -364,56 +380,64 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
 
                 }
             }
-        } else {
+        } else {*/
 
-            if (record.equals("swim")) {
-                String p = location.getText();
-                System.out.println(p);
-                int r = Integer.parseInt(recovery.getText());
-                System.out.println(r);
-                int l = Integer.parseInt(laps.getText());
-                System.out.println(l);
-                String sp = sprintsSwim.getText();
-                System.out.println(sp);
-                SwimEntry swimE = new SwimEntry(n, d, m, y, h, mm, s, km, p, r, l, sp);
-                System.out.println(swimE.getEntry());
-                myAthletes.addEntry(swimE);
-                outputArea.setText("Record added");
-                message = "Record added";
-            } else if (record.equals("run")) {
-                int rp = Integer.parseInt(reps.getText());
-                System.out.println(rp);
-                String sp = sprintsRun.getText();
-                System.out.println(sp);
-                int rc = Integer.parseInt(recovery.getText());
-                System.out.println(rc);
-                SprintEntry sprintE = new SprintEntry(n, d, m, y, h, mm, s, km, rp, sp, rc);
-                myAthletes.addEntry(sprintE);
-                outputArea.setText("Record added");
-                message = "Record added";
-            } else if (record.equals("cycle")) {
-                String t = terrain.getText();
-                System.out.println(terrain.getText());
-                String p = tempo.getText();
-                System.out.println(tempo.getText());
-                CycleEntry cycleE = new CycleEntry(n, d, m, y, h, mm, s, km, t, p);
-                myAthletes.addEntry(cycleE);
-                outputArea.setText("Record added");
-                message = "Record added";
-            } else if (record.length() == 0) {
-                Entry e = new Entry(n, d, m, y, h, mm, s, km);
-                myAthletes.addEntry(e);
-                outputArea.setText("Record added");
-                message = "Record added";
-
-            } else {
-                return message;
-            }
+        // creates SwimEntry object if swim type
+        if (record.equals("swim")) {
+            String p = location.getText();
+            System.out.println(p);
+            int r = Integer.parseInt(recovery.getText());
+            System.out.println(r);
+            int l = Integer.parseInt(laps.getText());
+            System.out.println(l);
+            String sp = sprintsSwim.getText();
+            System.out.println(sp);
+            SwimEntry swimE = new SwimEntry(n, d, m, y, h, mm, s, km, p, r, l, sp);
+            System.out.println(swimE.getEntry());
+            myAthletes.addEntry(swimE);
+            outputArea.setText("Record added");
+            message = "Record added";
         }
+        // creates SprintEntry object if run type
+        else if (record.equals("run")) {
+            int rp = Integer.parseInt(reps.getText());
+            System.out.println(rp);
+            String sp = sprintsRun.getText();
+            System.out.println(sp);
+            int rc = Integer.parseInt(recovery.getText());
+            System.out.println(rc);
+            SprintEntry sprintE = new SprintEntry(n, d, m, y, h, mm, s, km, rp, sp, rc);
+            myAthletes.addEntry(sprintE);
+            outputArea.setText("Record added");
+            message = "Record added";
+        }
+        // creates CycleEntry object if cycle type
+        else if (record.equals("cycle")) {
+            String t = terrain.getText();
+            System.out.println(terrain.getText());
+            String p = tempo.getText();
+            System.out.println(tempo.getText());
+            CycleEntry cycleE = new CycleEntry(n, d, m, y, h, mm, s, km, t, p);
+            myAthletes.addEntry(cycleE);
+            outputArea.setText("Record added");
+            message = "Record added";
+        }
+        // if no type entered, creates generic Entry object
+        else if (record.length() == 0) {
+            Entry e = new Entry(n, d, m, y, h, mm, s, km);
+            myAthletes.addEntry(e);
+            outputArea.setText("Record added");
+            message = "Record added";
+
+        } else {
+            return message;
+        }
+        //}
 
         return message;
     }
 
+    // method called by Look Up button to look up entry, returns last entry with given date
     public String lookupEntry() {
         int m = Integer.parseInt(month.getText());
         int d = Integer.parseInt(day.getText());
@@ -433,6 +457,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         return message;
     }
 
+    // method called by Find By Name button, returns all records under given name
     public String searchByName() {
         String n = name.getText();
         n = n.toLowerCase();
@@ -441,6 +466,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         return message;
     }
 
+    // method called by Remove button, removes entry of given name and date
     public String removeEntry() {
         String n = name.getText();
         int m = Integer.parseInt(month.getText());
